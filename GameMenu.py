@@ -3,6 +3,7 @@ import Hangman_Game
 import Functions
 
 
+
 def library():
 
     Functions.header('Game Library')
@@ -20,7 +21,7 @@ def library():
         Guessing_Game.play()
     elif hangman:
         print('You want play Hangman')
-        Hangman.play()
+        Hangman_Game.play()
 
 
 if __name__ == "__main__":

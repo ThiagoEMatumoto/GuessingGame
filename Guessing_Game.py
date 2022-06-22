@@ -4,6 +4,8 @@ import Functions
 
 def play():
 
+    number = 0
+
     Functions.header('Guessing Game')
 
     play_game = True
@@ -14,35 +16,22 @@ def play():
         print("\n")
 
         attempts = 0
-        multiplier = 1
+        multiplier_score = 1
         score = 1000
 
+        #######################
+        # Declaring the level
+        #######################
         level = int(input("What is the difficulty level ? [1|2|3|4|5]"))
-        if level == 1:
-            attempts = 12
-            multiplier = 2
-            score = 300
-        elif level == 2:
-            attempts = 10
-            multiplier = 2.5
-            score = 400
-        elif level == 3:
-            attempts = 8
-            multiplier = 3
-            score = 600
-        elif level == 4:
-            attempts = 5
-            multiplier = 4
-            score = 800
-        elif level == 5:
-            attempts = 3
-            multiplier = 5
-            score = 1000
+        setting_level(level)
 
         attempt_number = 1
 
         for attempt_number in range(1, attempts + 1):
 
+            #######################
+            # Getting and setting the number
+            #######################
             print("Attempt:{} of {}".format(attempt_number, attempts))
             number = int(input("Report your number [1-100]: "))
 
@@ -55,13 +44,17 @@ def play():
             lower = secret_number > number
 
             ######################
-            # if you win
+            # You win
             ######################
             if hit:
                 Functions.win()
                 break
             else:
-                lost_score = abs(secret_number - number) * multiplier
+
+                ######################
+                # Scores Discount Systems
+                ######################
+                lost_score = abs(secret_number - number) * multiplier_score
                 score = score - lost_score
                 if lower:
                     print("Your number was lower")
@@ -69,7 +62,7 @@ def play():
                     print("Your number was higher")
 
         ######################
-        # if you lose
+        # You lose
         ######################
         if number != secret_number:
             Functions.lose()
@@ -83,6 +76,34 @@ def play():
             play_game = False
 
     Functions.end_game()
+
+
+def setting_level(level):
+    if level == 1:
+        attempts = 12
+        multiplier = 1
+        score = 300
+        return attempts, multiplier, score
+    elif level == 2:
+        attempts = 10
+        multiplier = 2
+        score = 400
+        return attempts, multiplier, score
+    elif level == 3:
+        attempts = 8
+        multiplier = 3
+        score = 600
+        return attempts, multiplier, score
+    elif level == 4:
+        attempts = 5
+        multiplier = 4
+        score = 800
+        return attempts, multiplier, score
+    elif level == 5:
+        attempts = 3
+        multiplier = 5
+        score = 1000
+        return attempts, multiplier, score
 
 
 if __name__ == "__main__":
