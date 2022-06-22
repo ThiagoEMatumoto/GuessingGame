@@ -15,7 +15,7 @@ def play():
 
     while play_game:
 
-        miss = 6
+        miss = 0
 
         secret_word = random_secret_word()
 
@@ -33,11 +33,16 @@ def play():
                 ######################
                 # You lose
                 ######################
-                miss = miss - 1
-                game_over = (miss == 0)
-                if game_over:
-                    Functions.lose()
-                    break
+                miss += 1
+                drawing(miss)
+                game_over = (miss == 7)
+
+            ######################
+            # You lose
+            ######################
+            if game_over:
+                Functions.lose()
+                break
 
             ######################
             # You win
@@ -62,7 +67,7 @@ def play():
 
 def random_secret_word():
     ######################################
-    # Ope the file and close automatically
+    # creating a vector word
     ######################################
     word = []
 
@@ -86,6 +91,57 @@ def confirm_letter(secret_word, choose_letter, word):
         if letter == choose_letter:
             word[index] = choose_letter
         index = index + 1
+
+
+def drawing(miss):
+    print("  _______     ")
+    print(" |/      |    ")
+
+    if miss == 1:
+        print(" |      (_)   ")
+        print(" |            ")
+        print(" |            ")
+        print(" |            ")
+
+    if miss == 2:
+        print(" |      (_)   ")
+        print(" |      \     ")
+        print(" |            ")
+        print(" |            ")
+
+    if miss == 3:
+        print(" |      (_)   ")
+        print(" |      \|    ")
+        print(" |            ")
+        print(" |            ")
+
+    if miss == 4:
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |            ")
+        print(" |            ")
+
+    if miss == 5:
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |            ")
+
+    if miss == 6:
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      /     ")
+
+    if miss == 7:
+        print(" |      (_)   ")
+        print(" |      \|/   ")
+        print(" |       |    ")
+        print(" |      / \   ")
+
+    print(" |            ")
+    print("_|___         ")
+    print()
 
 
 if __name__ == "__main__":
